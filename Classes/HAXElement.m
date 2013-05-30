@@ -33,20 +33,22 @@
 	if((result != kAXErrorSuccess) && error) {
 		*error = [NSError errorWithDomain:NSStringFromClass(self.class) code:result userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
 			key, @"key",
-			self.elementRef, @"elementRef",
+			(id)self.elementRef, @"elementRef",
 		nil]];
 	}
 	return CFMakeCollectable(attributeRef);
 }
 
--(void)setAttributeValue:(CFTypeRef)value forKey:(NSString *)key error:(NSError **)error {
+-(BOOL)setAttributeValue:(CFTypeRef)value forKey:(NSString *)key error:(NSError **)error {
 	AXError result = AXUIElementSetAttributeValue(self.elementRef, (CFStringRef)key, value);
 	if((result != kAXErrorSuccess) && error) {
 		*error = [NSError errorWithDomain:NSStringFromClass(self.class) code:result userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
 			key, @"key",
-			self.elementRef, @"elementRef",
+			(id)self.elementRef, @"elementRef",
 		nil]];
 	}
+    
+    return result == kAXErrorSuccess;
 }
 
 

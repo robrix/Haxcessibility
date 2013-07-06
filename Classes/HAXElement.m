@@ -37,6 +37,17 @@
 }
 
 
+- (BOOL)isEqual:(id)object
+{
+    return [object isKindOfClass:[self class]] && CFEqual([self elementRef], [object elementRef]);
+}
+
+- (NSUInteger)hash
+{
+    return CFHash(self.elementRef);
+}
+
+
 -(CFTypeRef)copyAttributeValueForKey:(NSString *)key error:(NSError **)error {
 	NSParameterAssert(key != nil);
 	CFTypeRef attributeRef = NULL;

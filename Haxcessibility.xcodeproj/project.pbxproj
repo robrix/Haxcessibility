@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
+		BC0BAF9E1788F64E00F775EC /* Haxcessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0BAF9B1788F5D500F775EC /* Haxcessibility.m */; };
 		BC3B3B76175E9FD4002AD452 /* HAXElement+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = D44E051312D75B3D00541D6A /* HAXElement+Protected.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BC5E187A1788A8B3003178F3 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D2103312D6957000509E57 /* Carbon.framework */; };
 		BC5E187B1788A998003178F3 /* HAXApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D2106C12D69C8B00509E57 /* HAXApplication.m */; };
@@ -40,6 +41,7 @@
 		32DBCF5E0370ADEE00C91783 /* Haxcessibility.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Haxcessibility.pch; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Haxcessibility.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Haxcessibility.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC0BAF9B1788F5D500F775EC /* Haxcessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Haxcessibility.m; sourceTree = "<group>"; };
 		BC5E18551788A899003178F3 /* libHaxcessibility.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHaxcessibility.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5E18881788ABCE003178F3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D44E051312D75B3D00541D6A /* HAXElement+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HAXElement+Protected.h"; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				D4D2113C12D6AAF000509E57 /* Haxcessibility.h */,
+				BC0BAF9B1788F5D500F775EC /* Haxcessibility.m */,
 				32DBCF5E0370ADEE00C91783 /* Haxcessibility.pch */,
 			);
 			path = "Other Sources";
@@ -173,6 +176,7 @@
 			buildConfigurationList = 1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "Haxcessibility" */;
 			buildPhases = (
 				8DC2EF500486A6940098B216 /* Headers */,
+				BC0BAF9D1788F64600F775EC /* Sources */,
 				8DC2EF560486A6940098B216 /* Frameworks */,
 				8DC2EF520486A6940098B216 /* Resources */,
 			);
@@ -246,6 +250,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BC0BAF9D1788F64600F775EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC0BAF9E1788F64E00F775EC /* Haxcessibility.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BC5E18511788A899003178F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -437,6 +449,7 @@
 				BC5E18751788A899003178F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

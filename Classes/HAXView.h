@@ -1,11 +1,14 @@
-// HAXWindow.h
-// Created by Rob Rix on 2011-01-06
-// Copyright 2011 Rob Rix
+//
+//  HAXView.h
+//  Sopreso
+//
+//  Created by Kocsis Olivér on 2014.05.12..
+//  Copyright (c) 2014 Joinect Technologies. All rights reserved.
+//
 
 #import "HAXElement.h"
 
-@interface HAXWindow : HAXElement
-
+@interface HAXView : HAXElement
 @property (nonatomic, assign) CGPoint originCarbon;
 @property (nonatomic, assign, readonly) CGPoint originCocoa;
 
@@ -17,11 +20,7 @@
 
 @property (nonatomic, readonly) NSScreen *screen;
 
-@property (nonatomic, readonly) NSArray *views;
-
 -(BOOL)isFullscreen;
--(BOOL)isFullscreenWithEpsilon: (unsigned int) epsilon;
--(bool)raise;
--(bool)close;
+
 
 @end

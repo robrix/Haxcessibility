@@ -1,43 +1,15 @@
-// HAXWindow.m
-// Created by Rob Rix on 2011-01-06
-// Copyright 2011 Rob Rix
+//
+//  HAXView.m
+//  Sopreso
+//
+//  Created by Kocsis Olivér on 2014.05.12..
+//  Copyright (c) 2014 Joinect Technologies. All rights reserved.
+//
 
-#import "HAXWindow.h"
-#import "HAXElement+Protected.h"
 #import "HAXView.h"
-CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
-{
-    if (ABS(rect1.size.width - rect2.size.width) > epsilon)
-        return NO;
-    if (ABS(rect1.size.height - rect2.size.height) > epsilon)
-        return NO;
-    if (ABS(rect1.origin.x - rect2.origin.x) > epsilon)
-        return NO;
-    if (ABS(rect1.origin.y - rect2.origin.y) > epsilon)
-        return NO;
-    return YES;
-}
-@implementation HAXWindow
+#import "HAXElement+Protected.h"
+@implementation HAXView
 -(BOOL)isFullscreen
-{
-    BOOL isFullScreen = NO;
-    NSArray * sceenArray = [NSScreen screens];
-
-    for (NSScreen * screenI in sceenArray)
-    {
-        NSRect screenFrame;
-        screenFrame = [screenI frame];
-        NSRect windowFrame = self.frameCocoa;
-        
-        if(NSEqualRects(screenFrame, windowFrame))
-        {
-            isFullScreen = YES;
-            break;
-        }
-    }
-    return isFullScreen;
-}
--(BOOL)isFullscreenWithEpsilon: (unsigned int) epsilon
 {
     BOOL isFullScreen = NO;
     NSArray * sceenArray = [NSScreen screens];
@@ -48,7 +20,7 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
         screenFrame = [screenI frame];
         NSRect windowFrame = self.frameCocoa;
         
-        if( compareRect(screenFrame, windowFrame, epsilon) )
+        if(NSEqualRects(screenFrame, windowFrame))
         {
             isFullScreen = YES;
             break;
@@ -136,34 +108,7 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
 	return CFBridgingRelease([self copyAttributeValueForKey:(__bridge NSString *)kAXTitleAttribute error:NULL]);
 }
 
--(NSArray *)views
-{
-	NSArray *axChildren = self.children;
-    NSMutableArray *result = [NSMutableArray array];
-    
-    NSString * axRole;
-    for (HAXElement * haxElementI in axChildren)
-    {
-        axRole = [haxElementI copyAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:NULL];
-        if ([axRole isEqualToString:@"AXView"])
-        {
-            HAXView * haxView = [HAXView elementWithElementRef:(AXUIElementRef)haxElementI.elementRef];
-            [result addObject:haxView];
-        }
-    }
-	return result;
-}
 
 
--(bool)raise
-{
-	return [self performAction:(__bridge NSString *)kAXRaiseAction error:NULL];
-}
-
--(bool)close
-{
-	HAXElement *element = [self elementOfClass:[HAXElement class] forKey:(__bridge NSString *)kAXCloseButtonAttribute error:NULL];
-	return [element performAction:(__bridge NSString *)kAXPressAction error:NULL];
-}
 
 @end

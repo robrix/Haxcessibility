@@ -8,7 +8,8 @@
 
 @implementation HAXSystem
 
-+(instancetype)system {
++(instancetype)system
+{
 	AXUIElementRef element = AXUIElementCreateSystemWide();
 	HAXSystem *result = [self elementWithElementRef:element];
 	CFRelease(element);
@@ -16,7 +17,8 @@
 }
 
 
--(HAXApplication *)focusedApplication {
+-(HAXApplication *)focusedApplication
+{
 	NSError *error = nil;
 	return [self elementOfClass:[HAXApplication class] forKey:(NSString *)kAXFocusedApplicationAttribute error:&error];
 }

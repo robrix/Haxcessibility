@@ -32,4 +32,16 @@
 	return result;
 }
 
+
+-(NSString *)localizedName {
+	return (NSString *)[self attributeValueForKey:(NSString *)kAXTitleAttribute error:NULL];
+}
+
+
+-(pid_t)processIdentifier {
+	pid_t processIdentifier = 0;
+	AXUIElementGetPid(self.elementRef, &processIdentifier);
+	return processIdentifier;
+}
+
 @end

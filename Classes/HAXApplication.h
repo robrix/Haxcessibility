@@ -13,4 +13,8 @@
 
 +(instancetype)applicationWithPID:(pid_t)pid;
 
+@property (nonatomic, copy, readonly) NSString *localizedName;
+
+@property (nonatomic, readonly) pid_t processIdentifier;
+
 @end

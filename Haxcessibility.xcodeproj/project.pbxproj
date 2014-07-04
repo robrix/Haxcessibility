@@ -162,7 +162,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = HAX;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Rob Rix";
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "Haxcessibility" */;
@@ -257,7 +257,6 @@
 		1DEB91B208733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
@@ -275,7 +274,6 @@
 		1DEB91B308733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;

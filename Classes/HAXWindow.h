@@ -3,19 +3,11 @@
 // Copyright 2011 Rob Rix
 
 #import <Cocoa/Cocoa.h>
-#import <Haxcessibility/HAXElement.h>
+#import <Haxcessibility/HAXView.h>
 
-@interface HAXWindow : HAXElement
+@interface HAXWindow : HAXView
 
-@property (nonatomic, assign) CGPoint carbonOrigin;
-@property (nonatomic, assign, readonly) NSPoint origin;
-@property (nonatomic, assign) NSSize size;
-@property (nonatomic, assign) CGRect frameCarbon;
-@property (nonatomic, assign, readonly) NSRect frame;
-@property (nonatomic, readonly) NSString *title;
-@property (nonatomic, readonly) NSScreen *screen;
 @property (nonatomic, readonly) NSArray *views;
-@property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
 
 -(BOOL)raise;
 -(BOOL)close;

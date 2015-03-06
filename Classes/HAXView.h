@@ -6,6 +6,7 @@
 #import <Haxcessibility/HAXElement.h>
 
 @interface HAXView : HAXElement
+
 @property (nonatomic, assign) CGPoint carbonOrigin;
 @property (nonatomic, assign, readonly) NSPoint origin;
 @property (nonatomic, assign) NSSize size;
@@ -13,7 +14,6 @@
 @property (nonatomic, assign, readonly) NSRect frame;
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSScreen *screen;
-
--(BOOL)isFullscreen;
+@property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
 
 @end

@@ -10,6 +10,12 @@
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		BC3B3B76175E9FD4002AD452 /* HAXElement+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = D44E051312D75B3D00541D6A /* HAXElement+Protected.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C3E21520194F381400C85776 /* HAXButton.h in Headers */ = {isa = PBXBuildFile; fileRef = C3E2151C194F381400C85776 /* HAXButton.h */; };
+		C3E21521194F381400C85776 /* HAXButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E2151D194F381400C85776 /* HAXButton.m */; };
+		C3E21526194F38BE00C85776 /* NSScreen+PointConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = C3E21524194F38BD00C85776 /* NSScreen+PointConvert.h */; };
+		C3E21527194F38BE00C85776 /* NSScreen+PointConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E21525194F38BD00C85776 /* NSScreen+PointConvert.m */; };
+		C3E2152A194F38FB00C85776 /* HAXView.h in Headers */ = {isa = PBXBuildFile; fileRef = C3E21528194F38FB00C85776 /* HAXView.h */; };
+		C3E2152B194F38FB00C85776 /* HAXView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E21529194F38FB00C85776 /* HAXView.m */; };
 		D4D2103412D6957000509E57 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D2103312D6957000509E57 /* Carbon.framework */; };
 		D4D2103712D6959400509E57 /* HAXElement.h in Headers */ = {isa = PBXBuildFile; fileRef = D4D2103512D6959400509E57 /* HAXElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4D2103812D6959400509E57 /* HAXElement.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D2103612D6959400509E57 /* HAXElement.m */; };
@@ -28,6 +34,14 @@
 		32DBCF5E0370ADEE00C91783 /* Haxcessibility.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Haxcessibility.pch; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Haxcessibility.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Haxcessibility.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3E2151C194F381400C85776 /* HAXButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAXButton.h; sourceTree = "<group>"; };
+		C3E2151D194F381400C85776 /* HAXButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAXButton.m; sourceTree = "<group>"; };
+		C3E2151E194F381400C85776 /* HAXWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAXWindow.h; sourceTree = "<group>"; };
+		C3E2151F194F381400C85776 /* HAXWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAXWindow.m; sourceTree = "<group>"; };
+		C3E21524194F38BD00C85776 /* NSScreen+PointConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScreen+PointConvert.h"; sourceTree = "<group>"; };
+		C3E21525194F38BD00C85776 /* NSScreen+PointConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScreen+PointConvert.m"; sourceTree = "<group>"; };
+		C3E21528194F38FB00C85776 /* HAXView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAXView.h; sourceTree = "<group>"; };
+		C3E21529194F38FB00C85776 /* HAXView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAXView.m; sourceTree = "<group>"; };
 		D44E051312D75B3D00541D6A /* HAXElement+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HAXElement+Protected.h"; sourceTree = "<group>"; };
 		D4D2103312D6957000509E57 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		D4D2103512D6959400509E57 /* HAXElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAXElement.h; sourceTree = "<group>"; };
@@ -104,6 +118,8 @@
 		D4D2102E12D6947D00509E57 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C3E21524194F38BD00C85776 /* NSScreen+PointConvert.h */,
+				C3E21525194F38BD00C85776 /* NSScreen+PointConvert.m */,
 				D4D2106B12D69C8900509E57 /* HAXApplication.h */,
 				D4D2106C12D69C8B00509E57 /* HAXApplication.m */,
 				D4D2103512D6959400509E57 /* HAXElement.h */,
@@ -113,6 +129,12 @@
 				D4D2105412D698F400509E57 /* HAXSystem.m */,
 				D4D2108012D6A08600509E57 /* HAXWindow.h */,
 				D4D2108112D6A08800509E57 /* HAXWindow.m */,
+				C3E2151C194F381400C85776 /* HAXButton.h */,
+				C3E2151D194F381400C85776 /* HAXButton.m */,
+				C3E2151E194F381400C85776 /* HAXWindow.h */,
+				C3E2151F194F381400C85776 /* HAXWindow.m */,
+				C3E21528194F38FB00C85776 /* HAXView.h */,
+				C3E21529194F38FB00C85776 /* HAXView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -125,9 +147,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4D2105912D6991900509E57 /* HAXSystem.h in Headers */,
+				C3E2152A194F38FB00C85776 /* HAXView.h in Headers */,
 				D4D2103712D6959400509E57 /* HAXElement.h in Headers */,
+				C3E21522194F381400C85776 /* HAXWindow.h in Headers */,
 				D4D2113E12D6AB0400509E57 /* HAXApplication.h in Headers */,
+				C3E21520194F381400C85776 /* HAXButton.h in Headers */,
 				D4D2113F12D6AB0400509E57 /* HAXWindow.h in Headers */,
+				C3E21526194F38BE00C85776 /* NSScreen+PointConvert.h in Headers */,
 				D4D2113D12D6AAF000509E57 /* Haxcessibility.h in Headers */,
 				BC3B3B76175E9FD4002AD452 /* HAXElement+Protected.h in Headers */,
 			);
@@ -201,10 +227,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3E2152B194F38FB00C85776 /* HAXView.m in Sources */,
 				D4D2103812D6959400509E57 /* HAXElement.m in Sources */,
+				C3E21523194F381400C85776 /* HAXWindow.m in Sources */,
+				C3E21521194F381400C85776 /* HAXButton.m in Sources */,
 				D4D2105512D698F400509E57 /* HAXSystem.m in Sources */,
 				D4D2106D12D69C8B00509E57 /* HAXApplication.m in Sources */,
 				D4D2108212D6A08800509E57 /* HAXWindow.m in Sources */,
+				C3E21527194F38BE00C85776 /* NSScreen+PointConvert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +296,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = NS_BUILD_32_LIKE_64;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -282,6 +313,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = NS_BUILD_32_LIKE_64;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
 			name = Release;

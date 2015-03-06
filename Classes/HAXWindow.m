@@ -150,7 +150,7 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
     NSString * axRole;
     for (HAXElement * haxElementI in axChildren)
     {
-        axRole = [haxElementI copyAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:NULL];
+        axRole = CFBridgingRelease([haxElementI copyAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:NULL]);
         if ([axRole isEqualToString:@"AXView"])
         {
             HAXView * haxView = [HAXView elementWithElementRef:(AXUIElementRef)haxElementI.elementRef];

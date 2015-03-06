@@ -36,7 +36,7 @@
 }
 
 -(NSString *)localizedName {
-	return [self copyAttributeValueForKey:(NSString *)kAXTitleAttribute error:NULL];
+	return CFBridgingRelease([self copyAttributeValueForKey:(NSString *)kAXTitleAttribute error:NULL]);
 }
 
 -(pid_t)processIdentifier {

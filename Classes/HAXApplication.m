@@ -19,11 +19,11 @@
 }
 
 -(HAXWindow *)focusedWindow {
-	return [self elementOfClass:[HAXWindow class] forKey:(NSString *)kAXFocusedWindowAttribute error:nil];
+	return [self elementOfClass:[HAXWindow class] forKey:(NSString *)kAXFocusedWindowAttribute error:NULL];
 }
 
 -(NSArray *)windows {
-	NSArray *axWindowObjects = [self getAttributeValueForKey:(NSString *)kAXWindowsAttribute error:nil];
+	NSArray *axWindowObjects = [self getAttributeValueForKey:(NSString *)kAXWindowsAttribute error:NULL];
 	NSMutableArray *result = [NSMutableArray arrayWithCapacity:[axWindowObjects count]];
 	for (id axObject in axWindowObjects) {
 		[result addObject:[HAXWindow elementWithElementRef:(AXUIElementRef)axObject]];

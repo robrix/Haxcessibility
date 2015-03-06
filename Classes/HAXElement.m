@@ -173,7 +173,7 @@ static void axCallback(AXObserverRef observer, AXUIElementRef element, CFStringR
     NSArray * axUIElements = nil;
     NSMutableArray * result = nil;
     
-    axUIElements = [self getAttributeValueForKey:(__bridge NSString *)kAXChildrenAttribute error:nil];
+    axUIElements = [self getAttributeValueForKey:(__bridge NSString *)kAXChildrenAttribute error:NULL];
     if (axUIElements != nil) {
         result = [NSMutableArray arrayWithCapacity:[axUIElements count]];
         for (id elementI in axUIElements) {
@@ -185,7 +185,7 @@ static void axCallback(AXObserverRef observer, AXUIElementRef element, CFStringR
 }
 
 -(NSString *)role {
-    NSString * result = [self getAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:nil];
+    NSString * result = [self getAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:NULL];
     if ([result isKindOfClass:[NSString class]] == NO) {
         result = nil;
     }
@@ -213,7 +213,7 @@ static void axCallback(AXObserverRef observer, AXUIElementRef element, CFStringR
 }
 
 -(NSString *)title {
-    NSString * result = [self getAttributeValueForKey:NSAccessibilityTitleAttribute error:nil];
+    NSString * result = [self getAttributeValueForKey:NSAccessibilityTitleAttribute error:NULL];
     if ([result isKindOfClass:[NSString class]] == NO) {
         result = nil;
     }

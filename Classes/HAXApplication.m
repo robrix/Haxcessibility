@@ -35,11 +35,9 @@
 	return result;
 }
 
-
 -(NSString *)localizedName {
 	return [self copyAttributeValueForKey:(NSString *)kAXTitleAttribute error:NULL];
 }
-
 
 -(pid_t)processIdentifier {
 	pid_t processIdentifier = 0;

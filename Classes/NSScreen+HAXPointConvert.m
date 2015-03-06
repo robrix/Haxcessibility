@@ -1,15 +1,12 @@
-//
-//  NSScreen+PointConvert.m
-//  Sopreso
-//
-//  Created by Kocsis Olivér on 2014.05.05..
-//  Copyright (c) 2014 Joinect Technologies. All rights reserved.
-//
+//  NSScreen+HAXPointConvert.m
+//  Created by Kocsis Olivér on 2014-05-05
+//  Copyright 2014 Joinect Technologies
 
-#import "NSScreen+PointConvert.h"
+#import "NSScreen+HAXPointConvert.h"
 
-@implementation NSScreen (PointConvert)
-+ (NSScreen*) screenWithPoint: (NSPoint) p
+@implementation NSScreen (HAXPointConvert)
+
++ (NSScreen*)hax_screenWithPoint:(NSPoint)p
 {
     NSScreen *screen = nil;
     for (NSScreen *screenI in [NSScreen screens])
@@ -23,8 +20,7 @@
     return screen;
 }
 
-
-- (NSRect)frameCarbon
+- (NSRect)hax_frameCarbon
 {
     NSRect originScreenFrame = ((NSScreen *)[NSScreen screens][0]).frame;
     
@@ -36,7 +32,8 @@
     carbonFrame.size = [self frame].size;
     return carbonFrame;
 }
-+ (NSRect)cocoaScreenFrameFromCarbonScreenFrame:(CGRect)carbonPoint
+
++ (NSRect)hax_cocoaScreenFrameFromCarbonScreenFrame:(CGRect)carbonPoint
 {
     NSRect originScreenFrame = ((NSScreen *)[NSScreen screens][0]).frame;
     
@@ -48,7 +45,8 @@
     cocoaFrame.size = carbonPoint.size;
     return cocoaFrame;
 }
-+ (CGPoint)carbonScreenPointFromCocoaScreenPoint:(NSPoint)cocoaPoint
+
++ (CGPoint)hax_carbonScreenPointFromCocoaScreenPoint:(NSPoint)cocoaPoint
 {
     NSScreen *foundScreen = nil;
     CGPoint thePoint;
@@ -73,6 +71,5 @@
     
     return thePoint;
 }
-
 
 @end

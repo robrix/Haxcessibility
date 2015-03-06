@@ -5,6 +5,7 @@
 #import "HAXWindow.h"
 #import "HAXElement+Protected.h"
 #import "HAXView.h"
+
 CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
 {
     if (ABS(rect1.size.width - rect2.size.width) > epsilon)
@@ -17,7 +18,9 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
         return NO;
     return YES;
 }
+
 @implementation HAXWindow
+
 -(BOOL)isFullscreen
 {
     BOOL isFullScreen = NO;
@@ -27,7 +30,7 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
     {
         NSRect screenFrame;
         screenFrame = [screenI frame];
-        NSRect windowFrame = self.frameCocoa;
+        NSRect windowFrame = self.frame;
         
         if(NSEqualRects(screenFrame, windowFrame))
         {
@@ -37,6 +40,7 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
     }
     return isFullScreen;
 }
+
 -(BOOL)isFullscreenWithEpsilon: (unsigned int) epsilon
 {
     BOOL isFullScreen = NO;
@@ -46,7 +50,7 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
     {
         NSRect screenFrame;
         screenFrame = [screenI frame];
-        NSRect windowFrame = self.frameCocoa;
+        NSRect windowFrame = self.frame;
         
         if( compareRect(screenFrame, windowFrame, epsilon) )
         {
@@ -56,12 +60,13 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
     }
     return isFullScreen;
 }
+
 -(NSScreen *)screen
 {
     NSScreen *fullscreenScreen = nil;
     for (NSScreen * screenI in [NSScreen screens])
     {
-        if(NSEqualRects([screenI frame], self.frameCocoa))
+        if(NSEqualRects([screenI frame], self.frame))
         {
             fullscreenScreen = screenI;
             break;
@@ -69,7 +74,8 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
     }
     return fullscreenScreen;
 }
--(CGPoint)originCarbon
+
+-(CGPoint)carbonOrigin
 {
 	CGPoint origin = {0};
 	CFTypeRef originRef = [self copyAttributeValueForKey:(__bridge NSString *)kAXPositionAttribute error:NULL];
@@ -81,20 +87,20 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
 	}
 	return origin;
 }
--(CGPoint)originCocoa
+
+-(CGPoint)origin
 {
-    return [NSScreen cocoaScreenFrameFromCarbonScreenFrame:self.frameCarbon].origin;
+    return [NSScreen hax_cocoaScreenFrameFromCarbonScreenFrame:self.frameCarbon].origin;
 }
 
--(void)setOriginCarbon:(CGPoint)originCarbon
+-(void)setCarbonOrigin:(CGPoint)carbonOrigin
 {
-	AXValueRef originRef = AXValueCreate(kAXValueCGPointType, &originCarbon);
+	AXValueRef originRef = AXValueCreate(kAXValueCGPointType, &carbonOrigin);
 	[self setAttributeValue:originRef forKey:(__bridge NSString *)kAXPositionAttribute error:NULL];
 	CFRelease(originRef);
 }
 
-
--(CGSize)size
+-(NSSize)size
 {
 	CGSize size = {0};
 	CFTypeRef sizeRef = [self copyAttributeValueForKey:(__bridge NSString *)kAXSizeAttribute error:NULL];
@@ -107,27 +113,26 @@ CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
 	return size;
 }
 
--(void)setSize:(CGSize)size
+-(void)setSize:(NSSize)size
 {
 	AXValueRef sizeRef = AXValueCreate(kAXValueCGSizeType, &size);
 	[self setAttributeValue:sizeRef forKey:(__bridge NSString *)kAXSizeAttribute error:NULL];
 	CFRelease(sizeRef);
 }
 
-
 -(CGRect)frameCarbon
 {
-	return (CGRect){ .origin = self.originCarbon, .size = self.size };
+	return (CGRect){ .origin = self.carbonOrigin, .size = self.size };
 }
--(CGRect)frameCocoa
+-(NSRect)frame
 {
-    return [NSScreen cocoaScreenFrameFromCarbonScreenFrame:self.frameCarbon];
+    return [NSScreen hax_cocoaScreenFrameFromCarbonScreenFrame:self.frameCarbon];
 }
 
--(void)setFrameCarbon:(CGRect)frameCarbon
+-(void)setCarbonFrame:(CGRect)carbonFrame
 {
-	self.originCarbon = frameCarbon.origin;
-	self.size = frameCarbon.size;
+	self.carbonOrigin = carbonFrame.origin;
+	self.size = carbonFrame.size;
 }
 
 

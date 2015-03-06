@@ -4,105 +4,16 @@
 
 #import "HAXElement+Protected.h"
 #import "HAXButton.h"
+
+
 @interface HAXElement ()
+
 @property (nonatomic, strong) AXObserverRef observer __attribute__((NSObject));
+
 @end
 
+
 @implementation HAXElement
-
-@synthesize elementRef = _elementRef;
--(BOOL)hasChildren
-{
-    NSError * error = nil;
-    NSArray * result = nil;
-    result = CFBridgingRelease([self copyAttributeValueForKey:(__bridge NSString *)kAXChildrenAttribute error:&error]);
-    if (error || result == nil)
-    {
-        NSLog(@"role getter:: %@", [error debugDescription]);
-        result = nil;
-    }
-	return result ? [result count] : NO;
-
-}
--(NSArray *)children
-{
-    NSError * error = nil;
-    NSArray * axUIElements = nil;
-    axUIElements = CFBridgingRelease([self copyAttributeValueForKey:(__bridge NSString *)kAXChildrenAttribute error:&error]);
-    if (error)
-    {
-        NSLog(@"childrenElementRefs getter:: %@", [error debugDescription]);
-        
-        axUIElements = nil;
-    }
-    NSMutableArray * result = [NSMutableArray arrayWithCapacity:[axUIElements count]];
-    for (id elementI in axUIElements)
-    {
-        [result addObject:[HAXElement  elementWithElementRef:(AXUIElementRef)(elementI) ]];
-    }
-    return result;
-}
--(NSString *)role
-{
-    NSError * error = nil;
-    NSString * result = nil;
-    result = CFBridgingRelease([self copyAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:&error]);
-    if (error || result == nil || [result isKindOfClass:[NSString class]] == NO )
-    {
-        NSLog(@"role getter:: %@", [error debugDescription]);
-        result = nil;
-    }
-    return result;
-
-}
--(NSArray *) buttons
-{
-	NSArray *axChildren = self.children;
-    NSMutableArray *result = [NSMutableArray array];
-    
-    NSString * axRole;
-    for (HAXElement * haxElementI in axChildren)
-    {
-        axRole = [haxElementI copyAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:NULL];
-        if ([axRole isEqualToString:(__bridge NSString *)kAXButtonRole])
-        {
-            HAXButton * haxView = [HAXButton elementWithElementRef:(AXUIElementRef)haxElementI.elementRef];
-            [result addObject:haxView];
-        }
-    }
-	return [result count] ? result : nil;
-}
-
--(NSString *)title
-{
-    NSError * error = nil;
-    NSString * result = nil;
-    result = CFBridgingRelease([self copyAttributeValueForKey:NSAccessibilityTitleAttribute error:&error]);
-    if (error || result == nil || [result isKindOfClass:[NSString class]] == NO )
-    {
-        NSLog(@"title getter:: %@", [error debugDescription]);
-        result = nil;
-    }
-    return result;
-}
--(NSArray *)attributeNames
-{
-    __block CFArrayRef attrNamesRef = NULL;
-    NSArray *attrNames = nil;
-    if ([NSThread isMainThread])
-    {
-        AXUIElementCopyAttributeNames(_elementRef, &attrNamesRef);
-    }
-    else
-    {
-        dispatch_sync(dispatch_get_main_queue(), ^
-                      {
-                          AXUIElementCopyAttributeNames(_elementRef, &attrNamesRef);
-                      });
-    }
-    attrNames = CFBridgingRelease(attrNamesRef);
-    return attrNames;
-}
 
 +(instancetype)elementWithElementRef:(AXUIElementRef)elementRef
 {
@@ -126,7 +37,6 @@
 	}
 }
 
-
 -(bool)isEqualToElement:(HAXElement *)other {
 	return
 		[other isKindOfClass:self.class]
@@ -141,7 +51,6 @@
 	return CFHash(self.elementRef);
 }
 
-
 - (void)setDelegate:(id<HAXElementDelegate>)delegate;
 {
 	if (delegate && !_observer) {
@@ -149,7 +58,6 @@
 	}
 	_delegate = delegate;
 }
-
 
 -(CFTypeRef)copyAttributeValueForKey:(NSString *)key error:(NSError **)error
 {
@@ -230,7 +138,6 @@
 	return result == kAXErrorSuccess;
 }
 
-
 -(id)elementOfClass:(Class)klass forKey:(NSString *)key error:(NSError **)error
 {
 	AXUIElementRef subelementRef = (AXUIElementRef)[self copyAttributeValueForKey:key error:error];
@@ -243,7 +150,6 @@
 	}
 	return result;
 }
-
 
 -(void)addAXObserver
 {
@@ -357,6 +263,103 @@ static void axCallback(AXObserverRef observer, AXUIElementRef element, CFStringR
 	}
 	
 	self.observer = NULL;
+}
+
+-(BOOL)hasChildren
+{
+    NSError * error = nil;
+    NSArray * result = nil;
+    result = CFBridgingRelease([self copyAttributeValueForKey:(__bridge NSString *)kAXChildrenAttribute error:&error]);
+    if (error || result == nil)
+    {
+        NSLog(@"role getter:: %@", [error debugDescription]);
+        result = nil;
+    }
+    return result ? [result count] : NO;
+    
+}
+
+-(NSArray *)children
+{
+    NSError * error = nil;
+    NSArray * axUIElements = nil;
+    axUIElements = CFBridgingRelease([self copyAttributeValueForKey:(__bridge NSString *)kAXChildrenAttribute error:&error]);
+    if (error)
+    {
+        NSLog(@"childrenElementRefs getter:: %@", [error debugDescription]);
+        
+        axUIElements = nil;
+    }
+    NSMutableArray * result = [NSMutableArray arrayWithCapacity:[axUIElements count]];
+    for (id elementI in axUIElements)
+    {
+        [result addObject:[HAXElement  elementWithElementRef:(AXUIElementRef)(elementI) ]];
+    }
+    return result;
+}
+
+-(NSString *)role
+{
+    NSError * error = nil;
+    NSString * result = nil;
+    result = CFBridgingRelease([self copyAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:&error]);
+    if (error || result == nil || [result isKindOfClass:[NSString class]] == NO )
+    {
+        NSLog(@"role getter:: %@", [error debugDescription]);
+        result = nil;
+    }
+    return result;
+    
+}
+
+-(NSArray *) buttons
+{
+    NSArray *axChildren = self.children;
+    NSMutableArray *result = [NSMutableArray array];
+    
+    NSString * axRole;
+    for (HAXElement * haxElementI in axChildren)
+    {
+        axRole = [haxElementI copyAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:NULL];
+        if ([axRole isEqualToString:(__bridge NSString *)kAXButtonRole])
+        {
+            HAXButton * haxView = [HAXButton elementWithElementRef:(AXUIElementRef)haxElementI.elementRef];
+            [result addObject:haxView];
+        }
+    }
+    return [result count] ? result : nil;
+}
+
+-(NSString *)title
+{
+    NSError * error = nil;
+    NSString * result = nil;
+    result = CFBridgingRelease([self copyAttributeValueForKey:NSAccessibilityTitleAttribute error:&error]);
+    if (error || result == nil || [result isKindOfClass:[NSString class]] == NO )
+    {
+        NSLog(@"title getter:: %@", [error debugDescription]);
+        result = nil;
+    }
+    return result;
+}
+
+-(NSArray *)attributeNames
+{
+    __block CFArrayRef attrNamesRef = NULL;
+    NSArray *attrNames = nil;
+    if ([NSThread isMainThread])
+    {
+        AXUIElementCopyAttributeNames(_elementRef, &attrNamesRef);
+    }
+    else
+    {
+        dispatch_sync(dispatch_get_main_queue(), ^
+                      {
+                          AXUIElementCopyAttributeNames(_elementRef, &attrNamesRef);
+                      });
+    }
+    attrNames = CFBridgingRelease(attrNamesRef);
+    return attrNames;
 }
 
 @end

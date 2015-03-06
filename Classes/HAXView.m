@@ -1,14 +1,13 @@
-//
 //  HAXView.m
-//  Sopreso
-//
-//  Created by Kocsis Olivér on 2014.05.12..
-//  Copyright (c) 2014 Joinect Technologies. All rights reserved.
-//
+//  Created by Kocsis Olivér on 2014-05-12
+//  Copyright 2014 Joinect Technologies
 
 #import "HAXView.h"
 #import "HAXElement+Protected.h"
+
+
 @implementation HAXView
+
 -(BOOL)isFullscreen
 {
     BOOL isFullScreen = NO;
@@ -18,7 +17,7 @@
     {
         NSRect screenFrame;
         screenFrame = [screenI frame];
-        NSRect windowFrame = self.frameCocoa;
+        NSRect windowFrame = self.frame;
         
         if(NSEqualRects(screenFrame, windowFrame))
         {
@@ -28,12 +27,13 @@
     }
     return isFullScreen;
 }
+
 -(NSScreen *)screen
 {
     NSScreen *fullscreenScreen = nil;
     for (NSScreen * screenI in [NSScreen screens])
     {
-        if(NSEqualRects([screenI frame], self.frameCocoa))
+        if(NSEqualRects([screenI frame], self.frame))
         {
             fullscreenScreen = screenI;
             break;
@@ -41,7 +41,8 @@
     }
     return fullscreenScreen;
 }
--(CGPoint)originCarbon
+
+-(CGPoint)carbonOrigin
 {
 	CGPoint origin = {0};
 	CFTypeRef originRef = [self copyAttributeValueForKey:(__bridge NSString *)kAXPositionAttribute error:NULL];
@@ -53,20 +54,20 @@
 	}
 	return origin;
 }
--(CGPoint)originCocoa
+
+-(CGPoint)origin
 {
-    return [NSScreen cocoaScreenFrameFromCarbonScreenFrame:self.frameCarbon].origin;
+    return [NSScreen hax_cocoaScreenFrameFromCarbonScreenFrame:self.carbonFrame].origin;
 }
 
--(void)setOriginCarbon:(CGPoint)originCarbon
+-(void)setCarbonOrigin:(CGPoint)carbonOrigin
 {
-	AXValueRef originRef = AXValueCreate(kAXValueCGPointType, &originCarbon);
+	AXValueRef originRef = AXValueCreate(kAXValueCGPointType, &carbonOrigin);
 	[self setAttributeValue:originRef forKey:(__bridge NSString *)kAXPositionAttribute error:NULL];
 	CFRelease(originRef);
 }
 
-
--(CGSize)size
+-(NSSize)size
 {
 	CGSize size = {0};
 	CFTypeRef sizeRef = [self copyAttributeValueForKey:(__bridge NSString *)kAXSizeAttribute error:NULL];
@@ -79,36 +80,32 @@
 	return size;
 }
 
--(void)setSize:(CGSize)size
+-(void)setSize:(NSSize)size
 {
 	AXValueRef sizeRef = AXValueCreate(kAXValueCGSizeType, &size);
 	[self setAttributeValue:sizeRef forKey:(__bridge NSString *)kAXSizeAttribute error:NULL];
 	CFRelease(sizeRef);
 }
 
-
--(CGRect)frameCarbon
+-(CGRect)carbonFrame
 {
-	return (CGRect){ .origin = self.originCarbon, .size = self.size };
-}
--(CGRect)frameCocoa
-{
-    return [NSScreen cocoaScreenFrameFromCarbonScreenFrame:self.frameCarbon];
+	return (CGRect){ .origin = self.carbonOrigin, .size = self.size };
 }
 
--(void)setFrameCarbon:(CGRect)frameCarbon
+-(NSRect)frame
 {
-	self.originCarbon = frameCarbon.origin;
-	self.size = frameCarbon.size;
+    return [NSScreen hax_cocoaScreenFrameFromCarbonScreenFrame:self.carbonFrame];
 }
 
+-(void)setCarbonFrame:(CGRect)carbonFrame
+{
+	self.carbonOrigin = carbonFrame.origin;
+	self.size = carbonFrame.size;
+}
 
 -(NSString *)title
 {
 	return CFBridgingRelease([self copyAttributeValueForKey:(__bridge NSString *)kAXTitleAttribute error:NULL]);
 }
-
-
-
 
 @end

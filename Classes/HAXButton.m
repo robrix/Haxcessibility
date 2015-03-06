@@ -7,8 +7,7 @@
 
 @implementation HAXButton
 
--(void)press
-{
+-(void)press {
     [self performAction:(__bridge NSString *)kAXPressAction error:NULL];
 }
 

@@ -15,10 +15,9 @@
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSScreen *screen;
 @property (nonatomic, readonly) NSArray *views;
+@property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
 
--(BOOL)isFullscreen;
--(BOOL)isFullscreenWithEpsilon: (unsigned int) epsilon;
--(bool)raise;
--(bool)close;
+-(BOOL)raise;
+-(BOOL)close;
 
 @end

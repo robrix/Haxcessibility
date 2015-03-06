@@ -6,13 +6,10 @@
 
 @implementation NSScreen (HAXPointConvert)
 
-+ (NSScreen*)hax_screenWithPoint:(NSPoint)p
-{
++ (NSScreen*)hax_screenWithPoint:(NSPoint)p {
     NSScreen *screen = nil;
-    for (NSScreen *screenI in [NSScreen screens])
-    {
-        if (NSPointInRect(p, [screenI frame]))
-        {
+    for (NSScreen *screenI in [NSScreen screens]) {
+        if (NSPointInRect(p, [screenI frame])) {
             screen = screenI;
             break;
         }
@@ -20,8 +17,7 @@
     return screen;
 }
 
-- (NSRect)hax_frameCarbon
-{
+- (NSRect)hax_frameCarbon {
     NSRect originScreenFrame = ((NSScreen *)[NSScreen screens][0]).frame;
     
     NSRect carbonFrame;
@@ -33,8 +29,7 @@
     return carbonFrame;
 }
 
-+ (NSRect)hax_cocoaScreenFrameFromCarbonScreenFrame:(CGRect)carbonPoint
-{
++ (NSRect)hax_cocoaScreenFrameFromCarbonScreenFrame:(CGRect)carbonPoint {
     NSRect originScreenFrame = ((NSScreen *)[NSScreen screens][0]).frame;
     
     NSRect cocoaFrame;
@@ -46,26 +41,20 @@
     return cocoaFrame;
 }
 
-+ (CGPoint)hax_carbonScreenPointFromCocoaScreenPoint:(NSPoint)cocoaPoint
-{
++ (CGPoint)hax_carbonScreenPointFromCocoaScreenPoint:(NSPoint)cocoaPoint {
     NSScreen *foundScreen = nil;
     CGPoint thePoint;
     
-    for (NSScreen *screen in [NSScreen screens])
-    {
-        if (NSPointInRect(cocoaPoint, [screen frame]))
-        {
+    for (NSScreen *screen in [NSScreen screens]) {
+        if (NSPointInRect(cocoaPoint, [screen frame])) {
             foundScreen = screen;
         }
     }
     
-    if (foundScreen)
-    {
+    if (foundScreen) {
         CGFloat screenHeight = [foundScreen frame].size.height;
         thePoint = CGPointMake(cocoaPoint.x, screenHeight - cocoaPoint.y - 1);
-    }
-    else
-    {
+    } else {
         thePoint = CGPointMake(0.0, 0.0);
     }
     

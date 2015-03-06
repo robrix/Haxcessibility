@@ -14,15 +14,13 @@
 @property (nonatomic, readonly) BOOL hasChildren;
 @property (nonatomic, readonly) NSArray *children;
 @property (nonatomic, readonly) NSArray *attributeNames;
+@property (nonatomic, readonly) NSArray *buttons;
 
--(bool)isEqualToElement:(HAXElement *)other;
--(NSArray *) buttons;
+-(BOOL)isEqualToElement:(HAXElement *)other;
 
 @end
 
 @protocol HAXElementDelegate <NSObject>
-
 @optional
 -(void)elementWasDestroyed:(HAXElement *)element;
-
 @end

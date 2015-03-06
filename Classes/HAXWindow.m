@@ -5,6 +5,7 @@
 #import "HAXWindow.h"
 #import "HAXElement+Protected.h"
 #import "HAXView.h"
+#import "NSScreen+HAXPointConvert.h"
 
 CG_INLINE BOOL compareRect(CGRect rect1, CGRect rect2 , unsigned int epsilon)
 {

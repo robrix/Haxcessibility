@@ -4,6 +4,7 @@
 
 #import "HAXView.h"
 #import "HAXElement+Protected.h"
+#import "NSScreen+HAXPointConvert.h"
 
 
 @implementation HAXView

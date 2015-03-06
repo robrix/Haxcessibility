@@ -1,7 +1,7 @@
 // HAXElement.h
 // Created by Rob Rix on 2011-01-06
 // Copyright 2011 Rob Rix
-#import "Cocoa/Cocoa.h"
+
 #import <Foundation/Foundation.h>
 
 @protocol HAXElementDelegate;

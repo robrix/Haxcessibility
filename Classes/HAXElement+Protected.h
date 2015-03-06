@@ -2,8 +2,7 @@
 // Created by Rob Rix on 2011-01-06
 // Copyright 2011 Rob Rix
 
-#import "HAXElement.h"
-#import "NSScreen+HAXPointConvert.h"
+#import <Haxcessibility/HAXElement.h>
 
 @interface HAXElement ()
 

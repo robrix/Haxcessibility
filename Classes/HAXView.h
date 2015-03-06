@@ -2,7 +2,8 @@
 //  Created by Kocsis Olivér on 2014-05-12
 //  Copyright 2014 Joinect Technologies
 
-#import "HAXElement.h"
+#import <Cocoa/Cocoa.h>
+#import <Haxcessibility/HAXElement.h>
 
 @interface HAXView : HAXElement
 @property (nonatomic, assign) CGPoint carbonOrigin;

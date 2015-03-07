@@ -3,15 +3,17 @@
 // Copyright 2011 Rob Rix
 
 #import "HAXElement+Protected.h"
+#import "HAXButton.h"
+
 
 @interface HAXElement ()
+
 @property (nonatomic, strong) AXObserverRef observer __attribute__((NSObject));
+
 @end
 
+
 @implementation HAXElement
-
-@synthesize elementRef = _elementRef;
-
 
 +(instancetype)elementWithElementRef:(AXUIElementRef)elementRef {
 	return [[self alloc] initWithElementRef:elementRef];
@@ -34,8 +36,7 @@
 	}
 }
 
-
--(bool)isEqualToElement:(HAXElement *)other {
+-(BOOL)isEqualToElement:(HAXElement *)other {
 	return
 		[other isKindOfClass:self.class]
 	&&	CFEqual(self.elementRef, other.elementRef);
@@ -49,15 +50,17 @@
 	return CFHash(self.elementRef);
 }
 
-
-- (void)setDelegate:(id<HAXElementDelegate>)delegate;
-{
+-(void)setDelegate:(id<HAXElementDelegate>)delegate {
 	if (delegate && !_observer) {
 		[self addAXObserver];
 	}
 	_delegate = delegate;
 }
 
+-(id)getAttributeValueForKey:(NSString *)key error:(NSError **)error {
+    CFTypeRef result = [self copyAttributeValueForKey:key error:error];
+    return result ? CFBridgingRelease(result) : nil;
+}
 
 -(CFTypeRef)copyAttributeValueForKey:(NSString *)key error:(NSError **)error {
 	NSParameterAssert(key != nil);
@@ -72,7 +75,7 @@
 	return attributeRef;
 }
 
--(bool)setAttributeValue:(CFTypeRef)value forKey:(NSString *)key error:(NSError **)error {
+-(BOOL)setAttributeValue:(CFTypeRef)value forKey:(NSString *)key error:(NSError **)error {
 	NSParameterAssert(value != nil);
 	NSParameterAssert(key != nil);
 	AXError result = AXUIElementSetAttributeValue(self.elementRef, (__bridge CFStringRef)key, value);
@@ -85,7 +88,7 @@
 	return result == kAXErrorSuccess;
 }
 
--(bool)performAction:(NSString *)action error:(NSError **)error {
+-(BOOL)performAction:(NSString *)action error:(NSError **)error {
 	NSParameterAssert(action != nil);
 	AXError result = AXUIElementPerformAction(self.elementRef, (__bridge CFStringRef)action);
 	if ((result != kAXErrorSuccess) && error) {
@@ -160,6 +163,67 @@ static void axCallback(AXObserverRef observer, AXUIElementRef element, CFStringR
 	}
 	
 	self.observer = NULL;
+}
+
+-(BOOL)hasChildren {
+    return (self.children.count > 0);
+}
+
+-(NSArray *)children {
+    NSArray * axUIElements = nil;
+    NSMutableArray * result = nil;
+    
+    axUIElements = [self getAttributeValueForKey:(__bridge NSString *)kAXChildrenAttribute error:NULL];
+    if (axUIElements != nil) {
+        result = [NSMutableArray arrayWithCapacity:[axUIElements count]];
+        for (id elementI in axUIElements) {
+            [result addObject:[HAXElement  elementWithElementRef:(AXUIElementRef)(elementI)]];
+        }
+    }
+    
+    return result;
+}
+
+-(NSString *)role {
+    NSString * result = [self getAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:NULL];
+    if ([result isKindOfClass:[NSString class]] == NO) {
+        result = nil;
+    }
+    return result;
+}
+
+-(NSArray *) buttons {
+    NSArray *axChildren = self.children;
+    NSMutableArray *result = [NSMutableArray array];
+    
+    NSString * axRole;
+    for (HAXElement *haxElementI in axChildren) {
+        axRole = CFBridgingRelease([haxElementI copyAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:NULL]);
+        if (axRole == nil) {
+            result = nil;
+            break;
+        }
+        if ([axRole isEqualToString:(__bridge NSString *)kAXButtonRole]) {
+            HAXButton *button = [HAXButton elementWithElementRef:(AXUIElementRef)haxElementI.elementRef];
+            [result addObject:button];
+        }
+    }
+
+    return result;
+}
+
+-(NSString *)title {
+    NSString * result = [self getAttributeValueForKey:NSAccessibilityTitleAttribute error:NULL];
+    if ([result isKindOfClass:[NSString class]] == NO) {
+        result = nil;
+    }
+    return result;
+}
+
+-(NSArray *)attributeNames {
+    CFArrayRef attrNamesRef = NULL;
+    AXUIElementCopyAttributeNames(_elementRef, &attrNamesRef);
+    return attrNamesRef ? CFBridgingRelease(attrNamesRef) : nil;
 }
 
 @end

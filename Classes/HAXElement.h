@@ -9,8 +9,14 @@
 @interface HAXElement : NSObject
 
 @property (nonatomic, weak) id<HAXElementDelegate> delegate;
+@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, readonly) NSString *role;
+@property (nonatomic, readonly) BOOL hasChildren;
+@property (nonatomic, readonly) NSArray *children;
+@property (nonatomic, readonly) NSArray *attributeNames;
+@property (nonatomic, readonly) NSArray *buttons;
 
--(bool)isEqualToElement:(HAXElement *)other;
+-(BOOL)isEqualToElement:(HAXElement *)other;
 
 @end
 

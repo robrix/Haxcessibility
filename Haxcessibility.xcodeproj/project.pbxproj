@@ -10,11 +10,11 @@
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		BC3B3B76175E9FD4002AD452 /* HAXElement+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = D44E051312D75B3D00541D6A /* HAXElement+Protected.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		C3E21520194F381400C85776 /* HAXButton.h in Headers */ = {isa = PBXBuildFile; fileRef = C3E2151C194F381400C85776 /* HAXButton.h */; };
+		C3E21520194F381400C85776 /* HAXButton.h in Headers */ = {isa = PBXBuildFile; fileRef = C3E2151C194F381400C85776 /* HAXButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3E21521194F381400C85776 /* HAXButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E2151D194F381400C85776 /* HAXButton.m */; };
 		C3E21526194F38BE00C85776 /* NSScreen+HAXPointConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = C3E21524194F38BD00C85776 /* NSScreen+HAXPointConvert.h */; };
 		C3E21527194F38BE00C85776 /* NSScreen+HAXPointConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E21525194F38BD00C85776 /* NSScreen+HAXPointConvert.m */; };
-		C3E2152A194F38FB00C85776 /* HAXView.h in Headers */ = {isa = PBXBuildFile; fileRef = C3E21528194F38FB00C85776 /* HAXView.h */; };
+		C3E2152A194F38FB00C85776 /* HAXView.h in Headers */ = {isa = PBXBuildFile; fileRef = C3E21528194F38FB00C85776 /* HAXView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3E2152B194F38FB00C85776 /* HAXView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E21529194F38FB00C85776 /* HAXView.m */; };
 		D4D2103412D6957000509E57 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D2103312D6957000509E57 /* Carbon.framework */; };
 		D4D2103712D6959400509E57 /* HAXElement.h in Headers */ = {isa = PBXBuildFile; fileRef = D4D2103512D6959400509E57 /* HAXElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,8 +36,6 @@
 		8DC2EF5B0486A6940098B216 /* Haxcessibility.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Haxcessibility.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3E2151C194F381400C85776 /* HAXButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAXButton.h; sourceTree = "<group>"; };
 		C3E2151D194F381400C85776 /* HAXButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAXButton.m; sourceTree = "<group>"; };
-		C3E2151E194F381400C85776 /* HAXWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAXWindow.h; sourceTree = "<group>"; };
-		C3E2151F194F381400C85776 /* HAXWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAXWindow.m; sourceTree = "<group>"; };
 		C3E21524194F38BD00C85776 /* NSScreen+HAXPointConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScreen+HAXPointConvert.h"; sourceTree = "<group>"; };
 		C3E21525194F38BD00C85776 /* NSScreen+HAXPointConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScreen+HAXPointConvert.m"; sourceTree = "<group>"; };
 		C3E21528194F38FB00C85776 /* HAXView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAXView.h; sourceTree = "<group>"; };
@@ -122,19 +120,17 @@
 				C3E21525194F38BD00C85776 /* NSScreen+HAXPointConvert.m */,
 				D4D2106B12D69C8900509E57 /* HAXApplication.h */,
 				D4D2106C12D69C8B00509E57 /* HAXApplication.m */,
+				C3E2151C194F381400C85776 /* HAXButton.h */,
+				C3E2151D194F381400C85776 /* HAXButton.m */,
 				D4D2103512D6959400509E57 /* HAXElement.h */,
 				D44E051312D75B3D00541D6A /* HAXElement+Protected.h */,
 				D4D2103612D6959400509E57 /* HAXElement.m */,
 				D4D2105312D698F200509E57 /* HAXSystem.h */,
 				D4D2105412D698F400509E57 /* HAXSystem.m */,
-				D4D2108012D6A08600509E57 /* HAXWindow.h */,
-				D4D2108112D6A08800509E57 /* HAXWindow.m */,
-				C3E2151C194F381400C85776 /* HAXButton.h */,
-				C3E2151D194F381400C85776 /* HAXButton.m */,
-				C3E2151E194F381400C85776 /* HAXWindow.h */,
-				C3E2151F194F381400C85776 /* HAXWindow.m */,
 				C3E21528194F38FB00C85776 /* HAXView.h */,
 				C3E21529194F38FB00C85776 /* HAXView.m */,
+				D4D2108012D6A08600509E57 /* HAXWindow.h */,
+				D4D2108112D6A08800509E57 /* HAXWindow.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

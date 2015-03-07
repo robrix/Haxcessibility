@@ -73,7 +73,6 @@
         if(intersectionOverlap > bestOverlap) {
             matchingScreen = screenI;
             bestOverlap = intersectionOverlap;
-            break;
         }
     }
     return matchingScreen;

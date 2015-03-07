@@ -22,7 +22,6 @@
 	return result;
 }
 
-
 -(BOOL)raise {
 	return [self performAction:(__bridge NSString *)kAXRaiseAction error:NULL];
 }

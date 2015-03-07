@@ -2,17 +2,14 @@
 // Created by Rob Rix on 2011-01-06
 // Copyright 2011 Rob Rix
 
-#import <Haxcessibility/HAXElement.h>
+#import <Cocoa/Cocoa.h>
+#import <Haxcessibility/HAXView.h>
 
-@interface HAXWindow : HAXElement
+@interface HAXWindow : HAXView
 
-@property (nonatomic, assign) CGPoint origin;
-@property (nonatomic, assign) CGSize size;
-@property (nonatomic, assign) CGRect frame;
+@property (nonatomic, readonly) NSArray *views;
 
-@property (nonatomic, readonly) NSString *title;
-
--(bool)raise;
--(bool)close;
+-(BOOL)raise;
+-(BOOL)close;
 
 @end

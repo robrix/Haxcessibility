@@ -7,62 +7,26 @@
 
 @implementation HAXWindow
 
--(CGPoint)origin {
-	CGPoint origin = {0};
-	CFTypeRef originRef = [self copyAttributeValueForKey:(__bridge NSString *)kAXPositionAttribute error:NULL];
-	if(originRef) {
-		AXValueGetValue(originRef, kAXValueCGPointType, &origin);
-		CFRelease(originRef);
-		originRef = NULL;
-	}
-	return origin;
+-(NSArray *)views {
+	NSArray *axChildren = self.children;
+    NSMutableArray *result = [NSMutableArray array];
+    
+    NSString * axRole;
+    for (HAXElement * haxElementI in axChildren) {
+        axRole = [haxElementI getAttributeValueForKey:(__bridge NSString *)kAXRoleAttribute error:NULL];
+        if ([axRole isEqualToString:@"AXView"]) {
+            HAXView * haxView = [HAXView elementWithElementRef:(AXUIElementRef)haxElementI.elementRef];
+            [result addObject:haxView];
+        }
+    }
+	return result;
 }
 
--(void)setOrigin:(CGPoint)origin {
-	AXValueRef originRef = AXValueCreate(kAXValueCGPointType, &origin);
-	[self setAttributeValue:originRef forKey:(__bridge NSString *)kAXPositionAttribute error:NULL];
-	CFRelease(originRef);
-}
-
-
--(CGSize)size {
-	CGSize size = {0};
-	CFTypeRef sizeRef = [self copyAttributeValueForKey:(__bridge NSString *)kAXSizeAttribute error:NULL];
-	if(sizeRef) {
-		AXValueGetValue(sizeRef, kAXValueCGSizeType, &size);
-		CFRelease(sizeRef);
-		sizeRef = NULL;
-	}
-	return size;
-}
-
--(void)setSize:(CGSize)size {
-	AXValueRef sizeRef = AXValueCreate(kAXValueCGSizeType, &size);
-	[self setAttributeValue:sizeRef forKey:(__bridge NSString *)kAXSizeAttribute error:NULL];
-	CFRelease(sizeRef);
-}
-
-
--(CGRect)frame {
-	return (CGRect){ .origin = self.origin, .size = self.size };
-}
-
--(void)setFrame:(CGRect)frame {
-	self.origin = frame.origin;
-	self.size = frame.size;
-}
-
-
--(NSString *)title {
-	return CFBridgingRelease([self copyAttributeValueForKey:(__bridge NSString *)kAXTitleAttribute error:NULL]);
-}
-
-
--(bool)raise {
+-(BOOL)raise {
 	return [self performAction:(__bridge NSString *)kAXRaiseAction error:NULL];
 }
 
--(bool)close {
+-(BOOL)close {
 	HAXElement *element = [self elementOfClass:[HAXElement class] forKey:(__bridge NSString *)kAXCloseButtonAttribute error:NULL];
 	return [element performAction:(__bridge NSString *)kAXPressAction error:NULL];
 }

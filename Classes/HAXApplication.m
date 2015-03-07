@@ -8,7 +8,7 @@
 
 @implementation HAXApplication
 
-+(instancetype)applicationWithPID:(pid_t)pid; {
++(instancetype)applicationWithPID:(pid_t)pid {
 	AXUIElementRef app = AXUIElementCreateApplication(pid);
 	id result = nil;
 	if (app) {
@@ -19,12 +19,11 @@
 }
 
 -(HAXWindow *)focusedWindow {
-	NSError *error = nil;
-	return [self elementOfClass:[HAXWindow class] forKey:(NSString *)kAXFocusedWindowAttribute error:&error];
+	return [self elementOfClass:[HAXWindow class] forKey:(NSString *)kAXFocusedWindowAttribute error:NULL];
 }
 
 -(NSArray *)windows {
-	NSArray *axWindowObjects = CFBridgingRelease([self copyAttributeValueForKey:(NSString *)kAXWindowsAttribute error:nil]);
+	NSArray *axWindowObjects = [self getAttributeValueForKey:(NSString *)kAXWindowsAttribute error:NULL];
 	NSMutableArray *result = [NSMutableArray arrayWithCapacity:[axWindowObjects count]];
 	for (id axObject in axWindowObjects) {
 		[result addObject:[HAXWindow elementWithElementRef:(AXUIElementRef)axObject]];
@@ -32,11 +31,9 @@
 	return result;
 }
 
-
 -(NSString *)localizedName {
-	return [self copyAttributeValueForKey:(NSString *)kAXTitleAttribute error:NULL];
+	return [self getAttributeValueForKey:(NSString *)kAXTitleAttribute error:NULL];
 }
-
 
 -(pid_t)processIdentifier {
 	pid_t processIdentifier = 0;

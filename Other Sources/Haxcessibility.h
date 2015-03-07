@@ -6,3 +6,5 @@
 #import <Haxcessibility/HAXSystem.h>
 #import <Haxcessibility/HAXApplication.h>
 #import <Haxcessibility/HAXWindow.h>
+#import <Haxcessibility/HAXView.h>
+#import <Haxcessibility/HAXButton.h>
